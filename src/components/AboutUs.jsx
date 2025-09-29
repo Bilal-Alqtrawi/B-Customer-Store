@@ -70,7 +70,6 @@ function AboutUs() {
                     initial="initial"
                     animate={isInView ? "animate" : ""}
                     custom={i}
-                    // className="pr-2 text-center text-xl font-bold tracking-tighter sm:text-4xl md:text-3xl md:leading-[4rem]"
                     className="pr-1.5 text-xl font-extrabold tracking-tighter text-[var(--textPrimary)] md:text-3xl md:leading-[4rem]"
                   >
                     {current == "" ? <span>&nbsp;</span> : current}
@@ -87,13 +86,16 @@ function AboutUs() {
 
               <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
                 {features.map((feature) => (
-                  <div key={feature.name} className="relative flex items-start">
+                  <div
+                    key={feature.name}
+                    className="relative flex flex-col items-center gap-y-2 text-center md:flex-row md:items-start md:text-start"
+                  >
                     <div className="flex w-60 items-start gap-3 font-semibold text-[var(--textPrimary)]">
                       <feature.icon
                         className="size-7 text-[var(--primary)]"
                         aria-hidden="true"
                       />
-                      <span>{feature.name}:</span>
+                      <span className="flex-1">{feature.name}:</span>
                     </div>
                     <div className="flex-1 pl-2 text-[var(--textSecondary)]">
                       {feature.description}
@@ -104,7 +106,7 @@ function AboutUs() {
             </div>
           </div>
 
-          <div className="flex items-start justify-end lg:order-first">
+          <div className="flex items-start justify-center lg:order-first lg:justify-end">
             <div className="w-full max-w-lg lg:max-w-full">
               <img
                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop"

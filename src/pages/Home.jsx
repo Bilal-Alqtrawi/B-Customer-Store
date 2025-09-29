@@ -1,16 +1,16 @@
 import AboutUs from "../components/AboutUs";
 import Hero from "../components/Hero";
 import Testimonials from "../components/Testimonials";
-import ProductList from "../features/Products/ProductList";
+import FeaturedProducts from "../features/Products/FeaturedProducts";
 
 function Home() {
   return (
-    <div className="min-h-screen">
+    <>
       <Hero />
       <AboutUs />
-      <ProductList />
+      <FeaturedProducts />
       <Testimonials />
-    </div>
+    </>
   );
 }
 

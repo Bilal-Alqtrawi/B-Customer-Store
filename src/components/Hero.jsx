@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { TypeAnimation } from "react-type-animation";
+import Button from "../ui/Button";
 function Hero() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -57,10 +58,16 @@ function Hero() {
             >
               Your one-stop shop for everything you need.
             </motion.p>
-            <motion.div variants={itemVariants}>
-              <button className="mt-8 rounded-full bg-[var(--background-btn)] px-8 py-3 font-semibold text-white shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:bg-amber-500 hover:shadow-xl">
+            <motion.div variants={itemVariants} className="mt-8">
+              <Button
+                as="Link"
+                to="/products"
+                variant="primary"
+                size="lg"
+                className="hover:scale-105 hover:shadow-xl"
+              >
                 Shop Now
-              </button>
+              </Button>
             </motion.div>
           </motion.div>
 
