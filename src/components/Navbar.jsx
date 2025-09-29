@@ -35,10 +35,10 @@ function Navbar() {
     const currentPath = location.pathname + location.hash;
     const isActive = currentPath === path;
 
-    return `inline-flex  items-center justify-center rounded-lg border-0 px-4 py-2 text-center text-sm font-medium transition-all duration-200 ${
+    return `inline-flex items-center justify-center rounded-lg border-0 px-4 py-2 text-center text-sm font-medium transition-all duration-200 ${
       isActive
         ? "bg-amber-50 text-amber-600 shadow-md"
-        : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+        : "text-gray-700 hover:bg-amber-50 hover:text-amber-700"
     }`;
   };
   const getNavLinkMobileClass = (path) => {
@@ -93,9 +93,9 @@ function Navbar() {
       }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className="fixed top-0 z-50 w-full bg-white/80 shadow-md backdrop-blur-lg"
+      className="fixed top-0 z-50 w-full bg-[var(--background)] shadow-md backdrop-blur-lg"
     >
-      <div className="container mx-auto flex h-full items-center justify-between px-6">
+      <div className="container mx-auto flex h-full items-center justify-between px-4">
         <Link to="/" className="flex shrink-0 items-center gap-2 transition">
           <Logo />
           <span className="hidden text-lg font-bold text-gray-800 md:inline">
@@ -103,7 +103,7 @@ function Navbar() {
           </span>
         </Link>
 
-        <ul className="hidden items-center space-x-2 md:flex">
+        <ul className="hidden items-center space-x-2 lg:flex">
           {LINKS.map((link, idx) => (
             <li key={idx}>
               <NavLink to={link.to} className={getNavLinkClass(link.to)}>
@@ -151,13 +151,13 @@ function Navbar() {
 
           <NavLink
             to="/login"
-            className="hidden rounded-full bg-amber-500 px-6 py-2.5 font-medium text-white shadow-md transition hover:bg-amber-600 hover:shadow-lg md:inline-block"
+            className="hidden rounded-full bg-amber-500 px-6 py-2.5 font-medium text-white shadow-md transition hover:bg-amber-600 hover:shadow-lg lg:inline-block"
           >
             {isAuthenticated ? "Logout" : "Login"}
           </NavLink>
         </div>
 
-        <div className="block md:hidden">
+        <div className="block lg:hidden">
           <motion.button
             onClick={() => setMenuOpen((open) => !open)}
             className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
@@ -198,7 +198,7 @@ function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
-            className="absolute top-20 left-0 w-full rounded-b-lg shadow-md md:hidden"
+            className="absolute top-20 left-0 w-full rounded-b-lg shadow-md"
           >
             <div className="flex flex-col space-y-1 bg-amber-50 p-4 backdrop-blur-2xl">
               {LINKS.map((link, idx) => (

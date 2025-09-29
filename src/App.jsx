@@ -13,7 +13,6 @@ import Layout from "./components/Layout";
 export default function App() {
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
         <Route element={<Layout />}>
           <Route index path="/" element={<Navigate to="/home" replace />} />
