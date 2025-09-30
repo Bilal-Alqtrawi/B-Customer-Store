@@ -26,7 +26,7 @@ function Button({
   as,
   ...props
 }) {
-  const Component = as === "Link" ? Link : as || "button";
+  const Component = as?.toLowerCase() === "link" ? Link : as || "button";
 
   const combinedStyles = clsx(
     baseStyles,
@@ -41,5 +41,7 @@ function Button({
     </Component>
   );
 }
+
+
 
 export default Button;

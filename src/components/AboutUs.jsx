@@ -1,67 +1,36 @@
-import {
-  CheckBadgeIcon,
-  CubeTransparentIcon,
-  ShieldCheckIcon,
-  TruckIcon,
-} from "@heroicons/react/24/outline";
-import { motion, useInView } from "motion/react";
 import { useRef } from "react";
-
-const features = [
-  {
-    name: "Unmatched Quality",
-    description:
-      "We source the finest materials to ensure our products are built to last and exceed your expectations.",
-    icon: CheckBadgeIcon,
-  },
-  {
-    name: "Innovative Designs",
-    description:
-      "Our team stays ahead of the trends to bring you unique and modern products you won't find anywhere else.",
-    icon: CubeTransparentIcon,
-  },
-  {
-    name: "Fast & Reliable Shipping",
-    description:
-      "Your order is delivered to your doorstep in the fastest time possible, with tracking on every package.",
-    icon: TruckIcon,
-  },
-  {
-    name: "Exceptional Customer Support",
-    description:
-      "Our dedicated support team is here to help you around the clock with any questions or concerns.",
-    icon: ShieldCheckIcon,
-  },
-];
+import { motion, useInView } from "motion/react";
+import { features } from "../data/features";
 
 const text = "A Story of Passion for Quality and Style.";
+const splittedText = text.split(" ");
+const pullupVariant = {
+  initial: { y: 20, opacity: 0 },
+  animate: (i) => ({
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: i * 0.1,
+    },
+  }),
+};
 
 function AboutUs() {
-  const splittedText = text.split(" ");
-  const pullupVariant = {
-    initial: { y: 20, opacity: 0 },
-    animate: (i) => ({
-      y: 0,
-      opacity: 1,
-      transition: {
-        delay: i * 0.1,
-      },
-    }),
-  };
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   return (
     <section className="bg-white/80 py-24" id="aboutUs">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-16 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+      {/* <div className="mx-auto max-w-7xl px-6 lg:px-8"> */}
+      <div className="container mx-auto max-w-7xl px-4">
+        <div className="grid max-w-2xl grid-cols-1 items-start gap-x-16 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:pr-4">
-            <div className="relative w-full max-w-xl lg:mx-auto">
-              <h2 className="text-base leading-7 font-semibold text-[var(--primary)]">
+            <div className="relative w-full max-w-xl sm:mx-auto">
+              <h2 className="text-center text-base leading-7 font-semibold text-[var(--primary)] md:text-start">
                 About Us
               </h2>
 
-              <div className="flex">
+              <div className="flex justify-center md:justify-start">
                 {splittedText.map((current, i) => (
                   <motion.p
                     key={i}
@@ -70,13 +39,13 @@ function AboutUs() {
                     initial="initial"
                     animate={isInView ? "animate" : ""}
                     custom={i}
-                    className="pr-1.5 text-xl font-extrabold tracking-tighter text-[var(--textPrimary)] md:text-3xl md:leading-[4rem]"
+                    className="pr-1.5 text-xl font-extrabold tracking-tighter text-[var(--textPrimary)] md:text-2xl md:leading-[4rem] xl:text-3xl"
                   >
                     {current == "" ? <span>&nbsp;</span> : current}
                   </motion.p>
                 ))}
               </div>
-              <p className="text-md mt-4 leading-8 text-[var(--textSecondary)]">
+              <p className="text-md mt-4 text-center leading-8 text-[var(--textSecondary)] md:text-start">
                 We started with a simple idea: why can't high-quality products
                 also be stylish and affordable? From that question, we embarked
                 on a journey to find the best materials and designs to offer you
@@ -84,25 +53,25 @@ function AboutUs() {
                 should tell a story.
               </p>
 
-              <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+              <div className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
                 {features.map((feature) => (
                   <div
                     key={feature.name}
                     className="relative flex flex-col items-center gap-y-2 text-center md:flex-row md:items-start md:text-start"
                   >
-                    <div className="flex w-60 items-start gap-3 font-semibold text-[var(--textPrimary)]">
+                    <div className="flex basis-full items-start gap-3 font-semibold text-[var(--textPrimary)] md:basis-60">
                       <feature.icon
                         className="size-7 text-[var(--primary)]"
                         aria-hidden="true"
                       />
-                      <span className="flex-1">{feature.name}:</span>
+                      <span className="grow">{feature.name}:</span>
                     </div>
-                    <div className="flex-1 pl-2 text-[var(--textSecondary)]">
+                    <div className="flex-1 text-[var(--textSecondary)] md:pl-2">
                       {feature.description}
                     </div>
                   </div>
                 ))}
-              </dl>
+              </div>
             </div>
           </div>
 

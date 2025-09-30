@@ -10,11 +10,10 @@ import ProductModal from "../../ui/ProductModal";
 function FeaturedProducts() {
   const { isLoading, data: products, error } = useProducts();
 
-  if (isLoading) return <Spinner />;
   if (error) return <Error error="Error In Fetching Products Data" />;
 
   return (
-    <section className="bg-white py-24">
+    <section className="relative bg-white py-24">
       <div className="container mx-auto px-4">
         <div className="section-intro mb-16 text-center">
           <h2 className="text-base font-semibold tracking-wider text-[var(--primary)] uppercase">
@@ -29,25 +28,38 @@ function FeaturedProducts() {
           </p>
         </div>
 
-        <ProductGrid products={products} />
-
-        <div className="mt-20 text-center">
-          <Link
-            to="/products"
-            className="group transtion mx-auto inline-flex items-center space-x-2 rounded-md bg-[var(--background-btn)] px-4 py-2 text-sm text-white shadow-lg hover:bg-amber-600 hover:shadow-xl"
-          >
-            <span className="transition duration-300 group-hover:translate-x-1.5">
-              <ShoppingCartIcon className="size-5" />
-            </span>
-            <span>Explore More</span>
-          </Link>
-        </div>
+        {isLoading && !error && <Spinner />}
+        {!isLoading && !error && (
+          <>
+            <ProductGrid products={products} />
+            <div className="mt-20 text-center">
+              <Button
+                as="Link"
+                to="/products"
+                variant="primary"
+                size="sm"
+                className="group mx-auto space-x-2"
+              >
+                <span className="transition duration-300 group-hover:translate-x-1.5">
+                  <ShoppingCartIcon className="size-5" />
+                </span>
+                <span>Explore More</span>
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
 }
 
 function ProductGrid({ products }) {
+  if (products.length === 0)
+    return (
+      <p className="text-lg font-semibold">
+        No Products Available in this current time
+      </p>
+    );
   return (
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {products.slice(0, 4).map((product) => (
@@ -103,15 +115,14 @@ function ProductItem({ product }) {
               <span className="text-xl font-extrabold text-green-700 sm:text-2xl">
                 ${product.price}
               </span>
-              <button
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--background-btn)] px-4 py-2 font-bold text-white shadow-lg shadow-orange-500/20 transition-all duration-300 hover:bg-orange-500 hover:shadow-orange-500/40 focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:outline-none sm:w-auto"
-                onClick={(e) => {
-                  e.preventDefault();
-                }}
+              <Button
+                variant="primary"
+                size="md"
+                className="hover:bg-orange-500 hover:shadow-orange-500/40 focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:outline-none"
               >
                 <ShoppingCartIcon className="h-5 w-5" />
                 <span>Add</span>
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -126,12 +137,15 @@ function ProductItem({ product }) {
 
 function ProductDetailsContent({ product }) {
   return (
-    <div className="pt-8">
+    <div className="relative pt-8">
       <img
         src={product.image}
         alt={product.title}
         className="mx-auto h-60 object-contain"
       />
+      <span className="absolute top-1 right-7 rounded-full bg-[var(--primary)] px-3 py-1 text-xs font-bold text-white md:top-4 md:right-7">
+        {product.category}
+      </span>
       <h3 className="mt-6 text-2xl font-bold text-[var(--textPrimary)]">
         {product.title}
       </h3>
