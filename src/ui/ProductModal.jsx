@@ -48,6 +48,9 @@ function Window({ children, name }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{
+              duration: 0.5,
+            }}
             className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
             onClick={close}
           />
@@ -58,7 +61,7 @@ function Window({ children, name }) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed top-1/2 right-0 left-0 z-50 mx-auto flex max-h-[90vh] w-[90%] -translate-y-1/2 flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl md:top-1/2 md:bottom-auto md:left-1/2 md:max-h-[80vh] md:w-full md:max-w-2xl md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-xl"
+            className="fixed top-1/2 right-0 left-0 z-50 mx-auto flex max-h-[90vh] w-[90%] -translate-y-1/2 flex-col overflow-hidden rounded-2xl bg-white shadow-2xl md:top-1/2 md:bottom-auto md:left-1/2 md:max-h-[80vh] md:w-full md:max-w-2xl md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-xl"
             variants={{
               initial: { opacity: 0, scale: 0.9, y: 0 },
               animate: { opacity: 1, scale: 1, y: 0 },

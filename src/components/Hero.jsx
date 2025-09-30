@@ -1,22 +1,24 @@
 import { motion } from "motion/react";
 import { TypeAnimation } from "react-type-animation";
 import Button from "../ui/Button";
+import { ShoppingBagIcon } from "@heroicons/react/24/outline";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
+};
+
 function Hero() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
-  };
-
   return (
-    <div className="relative h-screen w-full overflow-hidden pt-20 md:pt-0">
+    <div className="relative h-screen w-full">
       <div className="absolute inset-0 bg-gradient-to-tr from-gray-50 via-purple-100 to-amber-200"></div>
 
       <motion.div
@@ -25,7 +27,7 @@ function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <div className="grid grid-cols-1 items-center gap-8 text-center md:grid-cols-2 md:text-left">
+        <div className="grid grid-cols-1 items-center gap-8 pt-24 text-center md:grid-cols-2 md:pt-0 md:text-left">
           <motion.div
             className="intro order-2 md:order-1"
             variants={containerVariants}
@@ -64,9 +66,10 @@ function Hero() {
                 to="/products"
                 variant="primary"
                 size="lg"
-                className="hover:scale-105 hover:shadow-xl"
+                className="flex items-center hover:scale-105 hover:shadow-xl"
               >
-                Shop Now
+                <ShoppingBagIcon className="size-5" />
+                <span>Shop Now</span>
               </Button>
             </motion.div>
           </motion.div>

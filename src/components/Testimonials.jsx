@@ -46,15 +46,15 @@ function TestimonialCard({ testimonial }) {
 function Testimonials() {
   return (
     <section className="bg-[var(--surface)] py-24 sm:py-32">
-      <div className="container mx-auto px-6 lg:px-8">
+      <div className="container mx-auto px-4">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-base leading-7 font-semibold text-[var(--primary)]">
             Testimonials
           </h2>
-          <p className="mt-2 text-4xl font-extrabold tracking-tight text-[var(--textPrimary)] sm:text-5xl">
+          <p className="mt-2 text-3xl font-extrabold tracking-tight text-[var(--textPrimary)] sm:text-5xl md:text-4xl">
             What Our Customers Say
           </p>
-          <p className="mt-6 text-lg leading-8 text-[var(--textSecondary)]">
+          <p className="text-md mt-6 leading-8 text-[var(--textSecondary)] md:text-lg">
             We are trusted by thousands of users. Here's a selection of reviews
             from our happy customers.
           </p>
