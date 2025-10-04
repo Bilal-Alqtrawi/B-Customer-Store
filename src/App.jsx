@@ -20,7 +20,7 @@ export default function App() {
             <Route index path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<Home />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/products/product/:id" element={<ProductDetails />} />
+            <Route path="/products/:productId" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

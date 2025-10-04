@@ -27,3 +27,120 @@ button {
 .modal-open {
   overflow: hidden;
 }
+
+input[type="radio"] {
+  position: relative;
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: var(--background-btn);
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+input[type="radio"]::before {
+  display: flex;
+  content: "";
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: white;
+  transition: transform 0.2s ease-in-out;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  -webkit-transform: translate(-50%, -50%) scale(0);
+  -moz-transform: translate(-50%, -50%) scale(0);
+  -ms-transform: translate(-50%, -50%) scale(0);
+  -o-transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  -webkit-transition: transform 0.2s ease-in-out;
+  -moz-transition: transform 0.2s ease-in-out;
+  -ms-transition: transform 0.2s ease-in-out;
+  -o-transition: transform 0.2s ease-in-out;
+}
+
+input[type="radio"]:checked::before {
+  background-color: var(--background-btn);
+  transform: translate(-50%, -50%) scale(1) !important;
+  -webkit-transform: translate(-50%, -50%) scale(1) !important;
+  -moz-transform: translate(-50%, -50%) scale(1) !important;
+  -ms-transform: translate(-50%, -50%) scale(1) !important;
+  -o-transform: translate(-50%, -50%) scale(1) !important;
+}
+
+/* Pagination */
+.product-carousel-container .swiper-pagination {
+  bottom: 0px !important;
+}
+
+.product-carousel-container .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background-color: #d1d5db;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.product-carousel-container .swiper-pagination-bullet-active {
+  background-color: var(--background-btn);
+  width: 25px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+/* Navigation - Buttons */
+.product-carousel-container .swiper-button-next,
+.product-carousel-container .swiper-button-prev {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  &:after {
+    display: none;
+  }
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.product-carousel-container .swiper-button-next,
+.product-carousel-container .swiper-button-prev {
+  color: var(--textPrimary) !important;
+}
+
+.product-carousel-container .swiper-button-next:hover,
+.product-carousel-container .swiper-button-prev:hover {
+  background-color: #f3f4f6;
+}
+
+/* Change size of Icon */
+.product-carousel-container .swiper-navigation-icon {
+  width: 50%;
+  height: 50%;
+}
+
+@media (max-width: 640px) {
+  .product-carousel-container .swiper-button-next,
+  .product-carousel-container .swiper-button-prev {
+    display: none;
+  }
+}

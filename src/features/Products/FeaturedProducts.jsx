@@ -3,7 +3,6 @@ import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { useProducts } from "./useProducts";
 import Spinner from "../../ui/Spinner";
 import Error from "../../ui/Error";
-import { Link } from "react-router";
 import Button from "../../ui/Button";
 import ProductModal from "../../ui/ProductModal";
 
@@ -54,7 +53,7 @@ function FeaturedProducts() {
 }
 
 function ProductGrid({ products }) {
-  if (products.length === 0)
+  if (products?.length === 0)
     return (
       <p className="text-lg font-semibold">
         No Products Available in this current time
