@@ -1,11 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "../../services/apiProducts";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getProducts, getFilteredProducts } from "../../services/apiProducts";
 
 // For get data we use useQuery
-export const useProducts = () => {
+export const useProducts = (category = "all") => {
   const { isLoading, data, error } = useQuery({
-    queryKey: ["products"],
-    queryFn: getProducts,
+    // each category have cache
+    queryKey: ["products", category],
+    queryFn: () =>
+      category && category !== "all"
+        ? getFilteredProducts(category)
+        : getProducts(),
   });
 
   return { isLoading, data, error };
