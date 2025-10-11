@@ -1,7 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { useProducts } from "../features/Products/useProducts";
 import Error from "../ui/Error";
-import Spinner from "../ui/Spinner";
 import ProductItem from "../features/Products/ProductItem";
 import { MagnifyingGlassIcon, FunnelIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";

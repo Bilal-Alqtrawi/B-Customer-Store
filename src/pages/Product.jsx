@@ -17,7 +17,7 @@ import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
 import Button from "../ui/Button";
 import SpinnerFullPage from "../ui/SpinnerFullPage";
 import Error from "../ui/Error";
-import { useProduct } from "../features/products/useProduct";
+import { useProduct } from "../features/products/useProduct.js";
 import { useCart } from "../features/cart/useCart";
 import { useAddItem } from "../features/cart/useAddItem";
 import ProductImageGallery from "../features/Products/ProductImageGallery";
