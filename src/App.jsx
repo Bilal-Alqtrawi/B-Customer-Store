@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import Home from "./pages/Home";
-import ProductDetails from "./pages/ProductDetails";
+import Product from "./pages/Product";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
@@ -20,7 +20,7 @@ export default function App() {
             <Route index path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<Home />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/products/:productId" element={<ProductDetails />} />
+            <Route path="/products/:productId" element={<Product />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

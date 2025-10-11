@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import Logo from "../ui/Logo";
-import {
-  Bars3BottomRightIcon,
-  MagnifyingGlassIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import {
   AnimatePresence,
   motion,
   useMotionValueEvent,
   useScroll,
 } from "motion/react";
+import SearchBar from "./SearchBar";
 
 const LINKS = [
   { to: "/home", label: "Home" },
@@ -23,8 +20,6 @@ const LINKS = [
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [query, setQuery] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
@@ -60,6 +55,19 @@ function Navbar() {
       setHidden(false);
     }
   });
+
+  useEffect(
+    function () {
+      window.scrollTo({ behavior: "smooth", top: 0 });
+    },
+    [location.pathname],
+  );
+
+  useEffect(function () {
+    const handleScroll = () => setMenuOpen(false);
+    window.addEventListener("scroll", handleScroll);
+    return window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(
     function () {
@@ -114,40 +122,7 @@ function Navbar() {
         </ul>
 
         <div className="flex items-center gap-4">
-          <motion.div
-            className="relative flex items-center rounded-full border border-gray-300 bg-white shadow-sm"
-            animate={{
-              width: searchOpen ? "250px" : "44px",
-            }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <motion.button
-              onClick={() => setSearchOpen((open) => !open)}
-              className={`z-10 flex size-11 items-center justify-center text-gray-500`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <MagnifyingGlassIcon className="size-5" />
-            </motion.button>
-
-            <AnimatePresence>
-              {searchOpen && (
-                <motion.input
-                  key="search"
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  transition={{ duration: 0.2, delay: 0.1 }}
-                  className="absolute right-4 left-11 bg-transparent text-sm text-gray-700 placeholder-gray-400 focus:outline-none"
-                  placeholder="Search products..."
-                  autoFocus
-                />
-              )}
-            </AnimatePresence>
-          </motion.div>
+          <SearchBar />
 
           <NavLink
             to="/login"
@@ -193,33 +168,44 @@ function Navbar() {
 
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25 }}
-            className="absolute top-20 left-0 w-full rounded-b-lg shadow-md"
-          >
-            <div className="flex flex-col space-y-1 bg-amber-50 p-4 backdrop-blur-2xl">
-              {LINKS.map((link, idx) => (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 top-20 z-[-1] min-h-screen bg-black"
+              onClick={() => setMenuOpen(false)}
+            />
+
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.25 }}
+              className="absolute top-20 left-0 w-full rounded-b-lg bg-[var(--background)] shadow-lg"
+            >
+              <div className="flex flex-col space-y-1 p-4">
+                {LINKS.map((link, idx) => (
+                  <NavLink
+                    key={idx}
+                    to={link.to}
+                    onClick={() => setMenuOpen(false)}
+                    className={getNavLinkMobileClass(link.to)}
+                  >
+                    {link.label}
+                  </NavLink>
+                ))}
                 <NavLink
-                  key={idx}
-                  to={link.to}
+                  to="/login"
                   onClick={() => setMenuOpen(false)}
-                  className={getNavLinkMobileClass(link.to)}
+                  className="mt-2 rounded-md bg-amber-500 px-4 py-3 text-center font-medium text-white hover:bg-amber-600"
                 >
-                  {link.label}
+                  {isAuthenticated ? "Logout" : "Login"}
                 </NavLink>
-              ))}
-              <NavLink
-                to="/login"
-                onClick={() => setMenuOpen(false)}
-                className="mt-2 rounded-md bg-amber-500 px-4 py-3 text-center font-medium text-white hover:bg-amber-600"
-              >
-                {isAuthenticated ? "Logout" : "Login"}
-              </NavLink>
-            </div>
-          </motion.div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.nav>

@@ -1,7 +1,50 @@
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Button from "../../ui/Button";
+import { useEffect } from "react";
+import { useAddItem } from "../cart/useAddItem";
+import { useUpdateQuantity } from "../cart/useUpdateQunatity";
+import { useCart } from "../cart/useCart";
 
 export default function ProductDetailsContent({ product }) {
+  const { addProductInCart, isPending: isAdded } = useAddItem();
+  const { updateItemQuantity, isUpdating } = useUpdateQuantity();
+  const { data: cartItems } = useCart();
+
+  const isInCart = cartItems?.some((item) => item.product_id === product?.id);
+
+  function handleAddToCart() {
+    if (isInCart) {
+      const item = cartItems.find((item) => item.product_id === product.id);
+      updateItemQuantity({
+        productId: product.id,
+        quantity: item.quantity + 1,
+        stock: product.stock - 1 === 0 ? 0 : product.stock - 1,
+      });
+      return;
+    }
+
+    const cartItem = {
+      product_id: product.id,
+      quantity: 1,
+      price: product.price,
+    };
+
+    addProductInCart({
+      cartItem,
+      stock: product.stock - 1 === 0 ? 0 : product.stock - 1,
+    });
+  }
+  useEffect(
+    function () {
+      if (product) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "visible";
+      }
+      return () => (document.body.style.overflow = "visible");
+    },
+    [product],
+  );
   return (
     <div className="relative pt-8">
       <img
@@ -22,9 +65,24 @@ export default function ProductDetailsContent({ product }) {
         <span className="text-3xl font-extrabold text-[var(--textPrimary)]">
           ${product.price}
         </span>
-        <Button size="lg">
-          <ShoppingCartIcon className="h-5 w-5" />
-          <span>Add to Cart</span>
+        <Button
+          size="lg"
+          disabled={isAdded || isUpdating || product.stock === 0}
+          onClick={handleAddToCart}
+          className={
+            product.stock === 0
+              ? "cursor-not-allowed bg-gray-400 hover:cursor-not-allowed hover:bg-gray-400"
+              : ""
+          }
+        >
+          {product.stock === 0 ? (
+            <span>Out of Stock</span>
+          ) : (
+            <>
+              <ShoppingCartIcon className="size-5" />
+              <span>{isAdded || isUpdating ? "Adding..." : "Add to Cart"}</span>
+            </>
+          )}
         </Button>
       </div>
     </div>
