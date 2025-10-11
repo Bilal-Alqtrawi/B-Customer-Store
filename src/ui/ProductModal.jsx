@@ -61,7 +61,7 @@ function Window({ children, name }) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed top-1/2 right-0 left-0 z-50 mx-auto flex max-h-[90vh] w-[90%] -translate-y-1/2 flex-col overflow-hidden rounded-2xl bg-white shadow-2xl md:top-1/2 md:bottom-auto md:left-1/2 md:max-h-[80vh] md:w-full md:max-w-2xl md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-xl"
+            className="fixed top-1/2 right-0 left-0 z-50 mx-auto flex max-h-[90vh] w-[90%] -translate-y-1/2 flex-col overflow-hidden rounded-2xl bg-white shadow-2xl md:top-1/2 md:bottom-auto md:left-1/2 md:h-fit md:w-full md:max-w-2xl md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-xl"
             variants={{
               initial: { opacity: 0, scale: 0.9, y: 0 },
               animate: { opacity: 1, scale: 1, y: 0 },
@@ -71,10 +71,10 @@ function Window({ children, name }) {
             <div className="mx-auto my-3 h-1.5 w-12 rounded-full bg-gray-300 md:hidden" />
 
             <button
-              className="absolute top-3 right-3 z-10 rounded-full bg-gray-100 p-1.5 text-gray-600 transition-colors hover:bg-gray-200"
+              className="absolute top-3 right-4 z-10 cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-600 transition-colors hover:bg-gray-200"
               onClick={close}
             >
-              <HiXMark className="h-5 w-5" />
+              <HiXMark className="size-5" />
             </button>
 
             <div className="flex-grow overflow-y-auto px-6 pb-6">
