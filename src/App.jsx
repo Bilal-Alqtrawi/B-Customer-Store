@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { lazy, Suspense } from "react";
 import SpinnerFullPage from "./ui/SpinnerFullPage";
+import Layout from "./components/Layout";
 
 const Home = lazy(() => import("./pages/Home"));
 const Product = lazy(() => import("./pages/Product"));
@@ -10,7 +11,6 @@ const Login = lazy(() => "./pages/Login");
 const Register = lazy(() => import("./pages/Register"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
-const Layout = lazy(() => "./components/Layout");
 
 export default function App() {
   return (
