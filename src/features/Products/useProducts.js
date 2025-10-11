@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getProducts, getFilteredProducts } from "../../services/apiProducts";
 
 // For get data we use useQuery

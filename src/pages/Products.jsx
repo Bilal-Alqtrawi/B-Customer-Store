@@ -24,9 +24,12 @@ function Products() {
     isLoading,
     error,
     data: products,
-  } = useProducts(searchParams.get("category") ?? "all");
+  } = useProducts(searchParams.get("category"));
 
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(function () {
+    const searchBarQuery = searchParams.get("search");
+    return searchBarQuery ? searchBarQuery : "";
+  });
   const [viewMode, setViewMode] = useState("grid");
   const [sortBy, setSortBy] = useState("relevance");
   const [priceRange, setPriceRange] = useState([0, 1000]);
@@ -49,6 +52,16 @@ function Products() {
       setPriceRange([minPrice, maxPrice]);
     }
   }, [maxPrice, minPrice, priceRange]);
+
+  useEffect(
+    function () {
+      const query = searchParams.get("search");
+      if (query) {
+        setQuery(searchParams.get("search"));
+      } else if (query === "") setQuery("");
+    },
+    [searchParams],
+  );
 
   const filteredAndSortedProducts = useMemo(() => {
     if (!products || !priceRange) return [];
@@ -109,8 +122,11 @@ function Products() {
     <div className="bg-gray-50 py-32">
       <div className="container mx-auto px-4">
         <div className="mb-8 text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight text-[var(--textPrimary)] sm:text-5xl">
-            Featured Products
+          <span className="text-base font-semibold tracking-wider text-[var(--primary)] uppercase">
+            Discover Our Collection
+          </span>{" "}
+          <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-[var(--textPrimary)] sm:text-5xl">
+            Products
           </h1>
           <p className="text-md mx-auto mt-4 max-w-2xl text-[var(--textSecondary)] sm:text-lg">
             Find the perfect item from our curated collection of high-quality
@@ -142,56 +158,69 @@ function Products() {
         </div>
 
         <div className="min-h-[60vh]">
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            // trace state of display/hidden elements
-            <AnimatePresence mode="wait">
-              {filteredAndSortedProducts.length > 0 ? (
-                <motion.div key="products-view">
-                  {viewMode === "grid" ? (
-                    <motion.div
-                      layout // save layout of Grid
-                      className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4"
-                    >
-                      {filteredAndSortedProducts.map((product) => (
-                        <motion.div
-                          key={product.id}
-                          layout="position" // display element in new position smoothly
-                          variants={cardVariants}
-                          initial="hidden"
-                          animate="visible"
-                          exit="exit"
-                        >
-                          <ProductItem product={product} />
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                  ) : (
-                    <ProductCarousel products={filteredAndSortedProducts} />
-                  )}
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="no-results-view"
-                  variants={cardVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                >
-                  <NoResult
-                    actions={[
-                      {
-                        label: "Clear All Filters",
-                        onClick: clearFilters,
-                        variant: "primary",
-                      },
-                    ]}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          )}
+          {/*  trace state of display/hidden elements */}
+          <AnimatePresence mode="wait">
+            {isLoading ? (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {Array.from({ length: 4 }, (_, i) => (
+                  <div
+                    key={i}
+                    className="flex animate-pulse flex-col overflow-hidden rounded-xl bg-[var(--surface)] shadow-md"
+                  >
+                    <div className="h-48 bg-gray-200 sm:h-64" />
+                    <div className="flex flex-col space-y-3 p-5">
+                      <div className="h-4 w-3/4 rounded bg-gray-200" />
+                      <div className="h-3 w-full rounded bg-gray-200" />
+                      <div className="h-3 w-5/6 rounded bg-gray-200" />
+                      <div className="mt-4 h-10 w-full rounded bg-gray-200" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : filteredAndSortedProducts.length > 0 ? (
+              <motion.div key="products-view">
+                {viewMode === "grid" ? (
+                  <motion.div
+                    layout // save layout of Grid
+                    className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+                  >
+                    {filteredAndSortedProducts.map((product) => (
+                      <motion.div
+                        key={product.id}
+                        layout="position" // display element in new position smoothly
+                        variants={cardVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                      >
+                        <ProductItem product={product} />
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                ) : (
+                  <ProductCarousel products={filteredAndSortedProducts} />
+                )}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="no-results-view"
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <NoResult
+                  actions={[
+                    {
+                      label: "Clear All Filters",
+                      onClick: clearFilters,
+                      variant: "primary",
+                    },
+                  ]}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 
