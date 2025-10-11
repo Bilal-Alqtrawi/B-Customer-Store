@@ -10,7 +10,7 @@ const Login = lazy(() => "./pages/Login");
 const Register = lazy(() => import("./pages/Register"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
-const Layout = lazy(() => "./components/Layout");
+const Layout = lazy(() => import("./components/Layout"));
 
 export default function App() {
   return (
