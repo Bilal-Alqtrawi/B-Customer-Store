@@ -1,5 +1,3 @@
-// src/features/Products/ProductReviews.jsx
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { StarIcon, UserCircleIcon } from "@heroicons/react/24/outline";

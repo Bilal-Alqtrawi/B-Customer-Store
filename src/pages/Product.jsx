@@ -17,10 +17,10 @@ import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
 import Button from "../ui/Button";
 import SpinnerFullPage from "../ui/SpinnerFullPage";
 import Error from "../ui/Error";
-import { useProduct } from "../features/products/useProduct.js";
+import { useProduct } from "../features/products/useProduct";
 import { useCart } from "../features/cart/useCart";
 import { useAddItem } from "../features/cart/useAddItem";
-import ProductImageGallery from "../features/Products/ProductImageGallery";
+import ProductImageGallery from "../features/products/ProductImageGallery";
 import ProductReviews from "../features/products/ProductReviews";
 import ProductSpecifications from "../features/products/ProductSpecifications";
 import RelatedProducts from "../features/products/RelatedProducts";
@@ -391,7 +391,10 @@ function Product() {
                     className="flex flex-1 items-center justify-center gap-2"
                   >
                     <ShoppingCartIcon className="size-5" />
-                    {isPending || isUpdating ? "Updating..." : "Add to Cart"}
+                    <span>
+                      {isAddingToCart && "Adding..."}
+                      {isPending || isUpdating ? "Updating..." : "Add to Cart"}
+                    </span>
                   </Button>
                   <Button
                     onClick={handleBuyNow}

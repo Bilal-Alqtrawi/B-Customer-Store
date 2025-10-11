@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import { useNavigate, useSearchParams } from "react-router";
-import { useProducts } from "../features/Products/useProducts";
+import { useProducts } from "../features/products/useProducts";
 
 function SearchBar() {
   const { data: products } = useProducts();

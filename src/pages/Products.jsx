@@ -1,11 +1,11 @@
 import { useState, useMemo, useEffect } from "react";
-import { useProducts } from "../features/Products/useProducts";
+import { useProducts } from "../features/products/useProducts";
 import Error from "../ui/Error";
-import ProductItem from "../features/Products/ProductItem";
+import ProductItem from "../features/products/ProductItem";
 import { MagnifyingGlassIcon, FunnelIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import FilterModal from "../ui/FilterModal";
-import ProductCarousel from "../features/Products/ProductCarousel";
+import ProductCarousel from "../features/products/ProductCarousel";
 import { useSearchParams } from "react-router";
 import NoResult from "../ui/NoResult";
 
