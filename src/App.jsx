@@ -1,15 +1,16 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
-import Home from "./pages/Home";
-import Product from "./pages/Product";
-import Products from "./pages/Products";
-import Cart from "./pages/Cart";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Checkout from "./pages/Checkout";
-import NotFoundPage from "./pages/NotFoundPage";
-import Layout from "./components/Layout";
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import SpinnerFullPage from "./ui/SpinnerFullPage";
+
+const Home = lazy(() => import("./pages/Home"));
+const Product = lazy(() => import("./pages/Product"));
+const Products = lazy(() => import("./pages/Products"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Login = lazy(() => "./pages/Login");
+const Register = lazy(() => import("./pages/Register"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const Layout = lazy(() => "./components/Layout");
 
 export default function App() {
   return (
