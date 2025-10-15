@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import Logo from "../ui/Logo";
+import Button from "../ui/Button";
 import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import {
   AnimatePresence,
@@ -9,6 +10,8 @@ import {
   useScroll,
 } from "motion/react";
 import SearchBar from "./SearchBar";
+import { useUser } from "../features/authentication/useUser";
+import { useLogout } from "../features/authentication/useLogout";
 
 const LINKS = [
   { to: "/home", label: "Home" },
@@ -19,8 +22,10 @@ const LINKS = [
 ];
 
 function Navbar() {
+  const { isAuthenticated } = useUser();
+  const { logout } = useLogout();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
   const location = useLocation();
@@ -125,8 +130,16 @@ function Navbar() {
           <SearchBar />
 
           <NavLink
-            to="/login"
+            to="/auth"
             className="hidden rounded-full bg-amber-500 px-6 py-2.5 font-medium text-white shadow-md transition hover:bg-amber-600 hover:shadow-lg lg:inline-block"
+            onClick={
+              isAuthenticated
+                ? (e) => {
+                    e.preventDefault();
+                    logout();
+                  }
+                : {}
+            }
           >
             {isAuthenticated ? "Logout" : "Login"}
           </NavLink>
