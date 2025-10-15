@@ -65,7 +65,7 @@ export async function signInWithProvider(provider, remember = true) {
   const { data, error } = await Supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: "/",
+      redirectTo: window.location.origin,
     },
   });
 
