@@ -62,10 +62,12 @@ export async function logout() {
 export async function signInWithProvider(provider, remember = true) {
   const Supabase = remember ? supabase : supabaseSession;
 
+  const redirectUrl = import.meta.env.VITE_BASE_URL;
+
   const { data, error } = await Supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: "https://b-customer-store.vercel.app/",
+      redirectTo: `${redirectUrl}/auth/v1/callback`,
     },
   });
 
