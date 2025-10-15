@@ -140,3 +140,15 @@ input[type="radio"]:checked::before {
     display: none;
   }
 }
+
+::placeholder {
+  transition: opacity 0.6s;
+  -webkit-transition: opacity 0.6s;
+  -moz-transition: opacity 0.6s;
+  -ms-transition: opacity 0.6s;
+  -o-transition: opacity 0.6s;
+}
+
+:focus::placeholder {
+  opacity: 0;
+}
