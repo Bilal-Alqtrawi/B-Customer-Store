@@ -67,7 +67,7 @@ export async function signInWithProvider(provider, remember = true) {
   const { data, error } = await Supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `${redirectUrl}/auth/v1/callback`,
+      redirectTo: `${redirectUrl}/home`,
     },
   });
 
