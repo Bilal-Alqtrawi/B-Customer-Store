@@ -60,13 +60,18 @@ export async function logout() {
 }
 
 export async function signInWithProvider(provider, remember = true) {
-  const redirectUrl = import.meta.env.VITE_BASE_URL;
   const Supabase = remember ? supabase : supabaseSession;
+
+  const redirectBase = import.meta.env.VITE_BASE_URL || "http://localhost:5173";
+
+  const redirectTo = `${redirectBase}/auth/v1/callback`;
+
+  console.log("signInWithProvider redirectTo:", redirectTo); // test
 
   const { data, error } = await Supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `${redirectUrl}`,
+      redirectTo,
     },
   });
 
