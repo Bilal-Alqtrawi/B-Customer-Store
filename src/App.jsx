@@ -14,6 +14,16 @@ const Checkout = lazy(() => import("./pages/Checkout"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const Layout = lazy(() => import("./components/Layout"));
 
+const Home = lazy(() => import("./pages/Home"));
+const Product = lazy(() => import("./pages/Product"));
+const Products = lazy(() => import("./pages/Products"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Login = lazy(() => "./pages/Login");
+const Register = lazy(() => import("./pages/Register"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const Layout = lazy(() => "./components/Layout");
+
 export default function App() {
   return (
     <>
